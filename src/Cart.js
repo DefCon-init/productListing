@@ -20,31 +20,8 @@ const data = [
     price: 350
   }
 ];
-const cart = []
-let totalItems = 0
-let grandTotal = 0
 function App() {
   const addItem = item => {
-    if (!!cart && cart.length > 0) {
-      cart.map(cartItem => {
-        if (cartItem.name == item.name) {
-          cartItem.quantity += 1
-          cartItem.price = item.price + cartItem.price
-        } else {
-          const cartItem = { ...item, quantity: 1 }
-          totalItems = cartItem.quantity
-          grandTotal = cartItem.price
-          cart.push(cartItem)
-        }
-      })
-    } else {
-      const cartItem = { ...item, quantity: 1 }
-      totalItems = cartItem.quantity
-      grandTotal = cartItem.price
-      cart.push(cartItem)
-    }
-  };
-  const updateCart = item => {
     console.log(item);
   };
   return (
@@ -58,9 +35,9 @@ function App() {
             </ListGroup>
           );
         })}
-        {
-          !!cart && !!cart.length && <Cart cart={cart} updateCart={(item) => updateCart(item)} totalItems={totalItems} grandTotal={grandTotal}/>
-        }
+        <div>
+          <Cart></Cart>
+        </div>
     </div>
   );
 }
