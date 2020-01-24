@@ -20,14 +20,14 @@ const data = [
     price: 350
   }
 ];
-const cart = []
+let cart = []
 let totalItems = 0
 let grandTotal = 0
 function App() {
   const addItem = item => {
     if (!!cart && cart.length > 0) {
-      cart.map(cartItem => {
-        if (cartItem.name == item.name) {
+      cart = cart.map(cartItem => {
+        if (cartItem.name === item.name) {
           cartItem.quantity += 1
           cartItem.price = item.price + cartItem.price
         } else {
@@ -36,6 +36,7 @@ function App() {
           grandTotal = cartItem.price
           cart.push(cartItem)
         }
+        return cart
       })
     } else {
       const cartItem = { ...item, quantity: 1 }
