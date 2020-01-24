@@ -1,45 +1,24 @@
-import React from "react";
-import "./App.css";
+import React, { Component } from "react";
 import { ListGroup } from "react-bootstrap";
-import Cart from './Cart'
-const data = [
-  {
-    name: "Pen drive (4GB)",
-    price: 500
-  },
-  {
-    name: "CD Case",
-    price: 275
-  },
-  {
-    name: "Mouse",
-    price: 300
-  },
-  {
-    name: "Keyboard",
-    price: 350
+class Cart extends Component {
+  render() {
+    const { cart } = this.props
+    return (
+     <div>
+    {
+        !!cart && !!cart.length && cart.map((item, index) => {
+            return (
+                <ListGroup horizontal key={index}>
+                <ListGroup.Item>{item.name}</ListGroup.Item>
+                <ListGroup.Item>{item.price}</ListGroup.Item>
+                <ListGroup.Item as='button' onClick={() => this.props.updateCart(item)}>Add</ListGroup.Item>
+              </ListGroup>   
+            )
+          })
+    }
+     </div>  
+    )
   }
-];
-function App() {
-  const addItem = item => {
-    console.log(item);
-  };
-  return (
-    <div className='App'>
-        {data.map((item, index) => {
-          return (
-            <ListGroup horizontal key={index}>
-              <ListGroup.Item>{item.name}</ListGroup.Item>
-              <ListGroup.Item>{item.price}</ListGroup.Item>
-              <ListGroup.Item as='button' onClick={() => addItem(item)}>Add</ListGroup.Item>
-            </ListGroup>
-          );
-        })}
-        <div>
-          <Cart></Cart>
-        </div>
-    </div>
-  );
 }
 
-export default App;
+export default Cart;
